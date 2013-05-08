@@ -3,7 +3,10 @@
 
 import math
 
+
 def get_prime_factors(number_to_factor):
+    """ returns a list of prime factors for a given number
+    """
     prime_factors = []
     while True:
         try:
@@ -33,7 +36,7 @@ def return_smallest_prime_factor(number_to_factor):
 
     # there is never a need to search beyond square root of the number, if we go beyond that then
     # the number is prime, plus one for inclusive generation in range
-    stop_search_at = int(math.floor(math.sqrt(number_to_factor/2))) + 1
+    stop_search_at = int(math.floor(math.sqrt(number_to_factor))) + 1
 
     # for each int up to when we stop iteration, start at 2 since 1 is not prime
     for test_number in xrange(2, stop_search_at):
@@ -46,6 +49,6 @@ def return_smallest_prime_factor(number_to_factor):
     # were given bad input)
     return number_to_factor
 
-the_prime_factors_are = get_prime_factors(600851475143)
-print max(the_prime_factors_are)
+#the_prime_factors_are = get_prime_factors(600851475143)
+#print max(the_prime_factors_are)
 

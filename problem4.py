@@ -3,23 +3,29 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
 
-# so that's from 100*100 = 10,000 to 999 * 999 = 998001
-# 997799
+# I've tried a few times, but I can't think of a better way than brute force for this at the moment
 
-def find_max_range(number_of_digits):
-    """ given how many digits we have to work with, this finds
-        the maximum range, for example a 3 digit solution
-        can be no larger than 999 * 999 = 998001 """
-    return (9 * number_of_digits) ** 2
+def is_palindrome(x):
+    """ checks if the number as a string and its reversal are the same
+    """
+    return str(x) == str(x)[::-1]
 
-def find_max_palindrome(number_to_search_below):
-    string_version = str(number_to_search_below)
-    number_length = len(string_version)
-    if number_length % 2 == 0:
-        palindrome_number = string_version[0:number_length/2] + string_version[number_length/2 -1 ::-1]
-        print palindrome_number
+
+def find_greatest_palindrome(start_range, end_range):
+    """ given a starting and ending point, will find the largest palindrome number between them
+        raises ValueError if none are found.
+    """
+    max_found = 0
+    for first_multiple in xrange(start_range, end_range):
+        for second_multiple in xrange(first_multiple, end_range):
+            product = first_multiple * second_multiple
+            if is_palindrome(product) and product > max_found:
+                max_found = product
+
+    if max_found == 0:
+        raise ValueError("Specified range contains no palindrome numbers.")
     else:
-        palindrome_number = string_version[0:number_length/2 + 1] + string_version[number_length/2 ::-1]
-        print palindrome_number
+        return max_found
 
-find_max_palindrome(1234567)
+print find_greatest_palindrome(100, 1000)
+
